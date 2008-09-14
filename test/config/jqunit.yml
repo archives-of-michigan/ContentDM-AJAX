@@ -1,0 +1,4 @@
+:browsers:
+  :safari: Safari
+  :firefox: Firefox
+:test_browser: :safari
