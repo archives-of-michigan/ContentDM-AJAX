@@ -2,14 +2,38 @@
 
 with (jqUnit) {
 	module('merge');
-	expect(2);
+	
+	var cdm = new ContentDM('localhost');
+	
+	test('first', function(){ ok(true); });
 
 	test('successful if a is empty', function(){
-		cdm = new ContentDM('localhost');
+		expect(1);
+		
 		ok(cdm.merge({}, { foo: 'bar' }));
 	});
-	test('contents of b if a is empty', function(){
-		cdm = new ContentDM('localhost');
-		equals({ foo: 'bar' }, cdm.merge({}, { foo: 'bar' }));
+	
+	test('returns contents of b if a is empty', function(){
+		expect(1);
+		
+		isObj({ foo: 'bar' }, cdm.merge({}, { foo: 'bar' }));
+	});
+	
+	test('returns contents of a if b is empty', function(){
+		expect(1);
+		
+		isObj({ foo: 'bar' }, cdm.merge({ foo: 'bar' }, {}));
+	});
+	
+	test('returns contents of a merged with b', function(){
+		expect(1);
+		
+		isObj({ foo: 'bar', james: 'bond' }, cdm.merge({ foo: 'bar' }, { james: 'bond' }));
+	});
+
+	test('does not overwrite contents of a with b', function(){
+		expect(1);
+
+		isObj({ foo: 'bar' }, cdm.merge({ foo: 'bar' }, { foo: 'baz' }));
 	});
 }
