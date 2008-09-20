@@ -1,9 +1,34 @@
-<? # $_GET['command']
+<? # $_POST['command']
 
+$params = array();
+foreach(array_keys($_POST) as $param) {
+	# echo "Converting: \n".$param.' => "'.$_POST[$param]."\"\n";
+	$params[$param] = json_decode($_POST[$param]);
+	# echo " to ".$params[$param]."\n\n";
+}
 
-dmQuery(array alias, array searchstring, array field, array sortby, int maxrecs, int start, 
-int & total, int suppress, int docptr) dmQuery(array alias, array searchstring, array field, array sortby, int maxrecs, int start, 
-int & total, int suppress, int docptr) 
+if($params['test_stubs']) {
+	include('./stubs.php');
+}
 
+$results = '';
+switch($_POST['command']) {
+	case 'dmQuery':
+		$total = 0;
+		$results = dmQuery($params['alias'], 
+											$params['searchstring'], 
+											$params['field'],
+											$params['sortby'],
+											$params['maxrecs'],
+											$params['start'],
+											$total);
+		break;
+	case 'dmGetCollectionList':
+		$results = dmGetCollectionList();
+		break;
+	default:
+		$results = array( 'error' => 'invalid operation requested: '.$_POST['command'] );
+}
 
+echo json_encode($results);
 ?>
