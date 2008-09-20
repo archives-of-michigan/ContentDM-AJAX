@@ -3,7 +3,6 @@ var jqUnit = jqUnit || {};
 (function ($) {
 	 //--------Core
   var _config = {
-		name: 'noname',
     fixture: null,
     Test: [],
     stats: {
@@ -21,7 +20,7 @@ var jqUnit = jqUnit || {};
   var isLocal = !!(window.location.protocol == 'file:');
   
   $(function() {
-    $('#' + _config.name + '_userAgent').html(navigator.userAgent);
+    $('#userAgent').html(navigator.userAgent);
     runTest();  
   });
   
@@ -74,7 +73,7 @@ var jqUnit = jqUnit || {};
         _config.stats.bad, ' tests of ', _config.stats.all, ' failed.</p>']
         .join(''))
         .appendTo("body");
-      $("#" + _config.name + "_banner").addClass(_config.stats.bad ? "fail" : "pass");
+      $("#banner").addClass(_config.stats.bad ? "fail" : "pass");
     });
   }
   
@@ -170,7 +169,7 @@ var jqUnit = jqUnit || {};
    * Resets the test setup. Useful for tests that modify the DOM.
    */
   function reset() {
-    $("#" + _config.name + "_main").html( _config.fixture );
+    $("#main").html( _config.fixture );
   }
   
   /**
