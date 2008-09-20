@@ -19,8 +19,11 @@ ContentDM.prototype = {
 				$('#cdm').innerHtml = data;
 			};
 		
-		if(environment.config.test_stubs)
-			options = this.merge(options, { test_stubs: true });
+		if(environment.config.test_stubs) {
+			options = this.merge(options, { test_stubs: true, cache: false });
+		} else {
+			options = this.merge(options, { cache: true });
+		}
 			
 		jQuery.ajax(this.merge(options,
 			{ 
@@ -29,7 +32,6 @@ ContentDM.prototype = {
 				success: onSuccess,
 				error: onFail,
 				url: this.url(),
-				cache: true,
 				async: true  // TODO (handler != null)
 		}));
 		
