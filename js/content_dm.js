@@ -1,9 +1,4 @@
-//document.domain = environment.host; //'haldigitalcollections.cdmhost.com'; //environment.host; 
-
-function ContentDM(host, root) {
-	this.host = host;
-	this.root = root;
-
+function ContentDM() {
 	this.last_method_result = null;
 	this.method_status = false;
 }
@@ -12,34 +7,36 @@ ContentDM.prototype = {
 	callMethod: function(handler, failure, options) {
 		var onFail = failure ||
 			function(){
+				console.log("callMethod: failure");
 				alert("Could not fetch list of collections from the server.  Please contact an administrator.");
 			};
 		var onSuccess = handler ||
 			function(data, status) {
+				console.log("callMethod: success");
 				$('#cdm').innerHtml = data;
 			};
 		
+		options = options || {};
+		options.data = options.data || {};
+		options.data.params = options.data.params || {};
+
 		if(environment.config.test_stubs) {
-			options = this.merge(options, { test_stubs: true, cache: false });
+			options = this.merge(options, { async: false, cache: false });
+			options.data.params = this.merge(options.data.params, { test_stubs: true });
 		} else {
-			options = this.merge(options, { cache: true });
+			options = this.merge(options, { async: true, cache: true });
 		}
-			
-		jQuery.ajax(this.merge(options,
+		options.data.params = $.toJSON(options.data.params);
+		
+		var call = jQuery.ajax(this.merge(options,
 			{ 
-				dataType: 'jsonp',
+				dataType: 'json',
 				type: 'post',
 				success: onSuccess,
 				error: onFail,
-				url: this.url(),
-				async: true  // TODO (handler != null)
+				url: this.url()
 		}));
-		
-		//TODO - return results immediately (block and wait for results when async: false)
-		//if(handler) {
-		//} else {
-		//	return new Result(this.results, this.status);
-		//}
+
 		return true;
 	},
 
@@ -52,11 +49,12 @@ ContentDM.prototype = {
 	},
 
 	query: function(options, handler, failure) {
-		return this.callMethod(handler, failure, this.merge(options, { 
+		return this.callMethod(handler, failure, { 
 			data: {
-				command: 'dmQuery'
+				command: 'dmQuery',
+				params: options
 			}
-		}));
+		});
 	},
 
 

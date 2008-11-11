@@ -1,18 +1,17 @@
-<? # $_POST['command']
+<?
+include('./JSON.php');
 
-$params = array();
-foreach(array_keys($_POST) as $param) {
-	# echo "Converting: \n".$param.' => "'.$_POST[$param]."\"\n";
-	$params[$param] = json_decode($_POST[$param]);
-	# echo " to ".$params[$param]."\n\n";
-}
+$command = $_POST['command'];
 
-if($params['test_stubs']) {
+$json = new Services_JSON();
+$params = $json->decode(stripslashes($_POST['params']));
+
+if($params->test_stubs) {
 	include('./stubs.php');
 }
 
 $results = '';
-switch($_POST['command']) {
+switch($command) {
 	case 'dmQuery':
 		$total = 0;
 		$results = dmQuery($params['alias'], 
@@ -30,5 +29,5 @@ switch($_POST['command']) {
 		$results = array( 'error' => 'invalid operation requested: '.$_POST['command'] );
 }
 
-echo json_encode($results);
+echo $json->encode($results);
 ?>

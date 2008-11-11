@@ -3,7 +3,7 @@
 with (jqUnit) {
 	module('merge');
 	
-	var cdm = new ContentDM('localhost');
+	var cdm = new ContentDM();
 	
 	test('first', function(){ ok(true); });
 

@@ -1,4 +1,4 @@
 :browsers:
   :safari: Safari
   :firefox: Firefox
-:test_browser: :safari
+:test_browser: :firefox
