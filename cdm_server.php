@@ -1,5 +1,7 @@
 <?
-include('./JSON.php');
+include('../dmscripts/DMSystem.php');
+include('config.php');
+include('JSON.php');
 
 $command = $_POST['command'];
 
@@ -7,7 +9,7 @@ $json = new Services_JSON();
 $params = $json->decode(stripslashes($_POST['params']));
 
 if($params->test_stubs) {
-	include('./stubs.php');
+	include('stubs.php');
 }
 
 $results = '';
