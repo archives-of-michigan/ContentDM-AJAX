@@ -2,7 +2,7 @@
 include('../dmscripts/DMSystem.php');
 include('config.php');
 include('JSON.php');
-include('airbag_functions.php')
+include('airbag_functions.php');
 
 $command = $_POST['command'];
 
