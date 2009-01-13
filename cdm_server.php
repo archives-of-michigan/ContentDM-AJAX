@@ -27,6 +27,9 @@ switch($command) {
   case 'dmGetCollectionList':
     $results = dmGetCollectionList();
     break;
+  case 'getCollectionsWithMetaData':
+    $results = getCollectionsWithMetaData();
+    break; 
   default:
     $results = array( 'error' => 'invalid operation requested: '.$_POST['command'] );
 }
