@@ -1,6 +1,6 @@
 <?
 include('../dmscripts/DMSystem.php');
-include('config.php');
+include('../cdm4/config.php');
 include('JSON.php');
 
 $command = $_POST['command'];
@@ -28,6 +28,7 @@ switch($command) {
     $results = dmGetCollectionList();
     break;
   case 'getCollectionsWithMetaData':
+    include('api/getCollectionsWithMetaData.php');
     $results = getCollectionsWithMetaData();
     break; 
   default:
