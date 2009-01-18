@@ -31,6 +31,10 @@ switch($command) {
     include('api/getCollectionsWithMetaData.php');
     $results = getCollectionsWithMetaData();
     break; 
+  case 'collectionInfo':
+    include('api/collectionInfo.php');
+    $results = collectionInfo($params->alias);
+    break;
   default:
     $results = array( 'error' => 'invalid operation requested: '.$_POST['command'] );
 }
