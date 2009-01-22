@@ -1,5 +1,5 @@
 <?
-function getCollectionsWithMetaData() {
+function get_collections_with_meta_data() {
   $collections = dmGetCollectionList();
   foreach($collections as &$item) {
     dmGetCollectionFullResInfo($item['alias'], $enabled, $public, $volprefix, $volsize, $displaysize, $archivesize);
