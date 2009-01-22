@@ -27,13 +27,17 @@ switch($command) {
   case 'dmGetCollectionList':
     $results = dmGetCollectionList();
     break;
-  case 'getCollectionsWithMetaData':
-    include('api/getCollectionsWithMetaData.php');
-    $results = getCollectionsWithMetaData();
+  case 'get_collections_with_meta_data':
+    include('api/get_collections_with_meta_data.php');
+    $results = get_collections_with_meta_data();
     break; 
-  case 'collectionInfo':
-    include('api/collectionInfo.php');
-    $results = collectionInfo($params->alias);
+  case 'collection_info':
+    include('api/collection_info.php');
+    $results = collection_info($params->alias);
+    break;
+  case 'featured_items_for_collection':
+    include('api/featured_items_for_collection.php');
+    $results = featured_items_for_collection($params->alias);
     break;
   default:
     $results = array( 'error' => 'invalid operation requested: '.$_POST['command'] );
