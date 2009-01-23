@@ -6,7 +6,7 @@ require 'htmlentities'
 describe "dmQuery" do
   before(:each) do
     @params = {
-      'alias' => 'all',
+      'alias' => ['all'],
       'field' => 'description',
       'searchstring' => [{
         'field' => 'description',
