@@ -21,5 +21,7 @@ function dm_query($params) {
                     $params->maxrecs,
                     $params->start,
                     $total);
+  
+  return $results;
 }
 ?>
