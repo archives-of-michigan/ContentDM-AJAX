@@ -14,7 +14,7 @@ describe "collection_info" do
     @curl.http_post(
       Curl::PostField.content('command', 'collection_info'),
       Curl::PostField.content('params', @params.to_json))
-    puts @curl.body_str
+
     @results = JSON.parse(@curl.body_str)
   end
   
@@ -27,12 +27,12 @@ describe "collection_info" do
     @results['full_res_info'].should be_a_kind_of(Hash)
     @results['full_res_info']['archivesize'].should == {"height"=>"2400", "width"=>"3200"}
   end
-  it "should return false for an invalid alias" do
+  it "should return [false] for an invalid alias" do
     @params = {
       'alias' => '/abcdef'
     }
     do_post
     
-    results.should be_false
+    @results.should == [false]
   end
 end
