@@ -15,14 +15,8 @@ if($params->test_stubs) {
 $results = '';
 switch($command) {
   case 'dmQuery':
-    $total = 0;
-    $results = dmQuery($params->alias, 
-                      $params->searchstring, 
-                      $params->field,
-                      $params->sortby,
-                      $params->maxrecs,
-                      $params->start,
-                      $total);
+    include('api/dm_query.php');
+    $results = dm_query($params);
     break;
   case 'dmGetCollectionList':
     $results = dmGetCollectionList();
