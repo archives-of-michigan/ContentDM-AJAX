@@ -1,21 +1,15 @@
-# require '../spec_helper.rb'
-require 'curb'
+require File.join(File.dirname(__FILE__),'..','spec_helper')
 require 'json'
 
 describe "collection_info" do
   before(:each) do
-    @curl = Curl::Easy.new("http://haldigitalcollections.cdmhost.com/cdm_ajax/cdm_server.php")
     @params = {
       'alias' => '/p4006coll2'
     }
   end
   
   def do_post
-    @curl.http_post(
-      Curl::PostField.content('command', 'collection_info'),
-      Curl::PostField.content('params', @params.to_json))
-
-    @results = JSON.parse(@curl.body_str)
+    @results = execute_command('collection_info', @params)
   end
   
   it "should return the collection name" do
