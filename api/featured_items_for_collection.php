@@ -1,13 +1,18 @@
 <?
 function featured_items_for_collection($alias) {
   $params = array(
-    'field' => 'featured',
-    'string' => '1',
-    'mode' => 'exact'
+    'searchstring' => array(
+      array(
+        'field' => 'featured',
+        'string' => '1',
+        'mode' => 'exact'
+      )
+    )
   );
   $fields = array('Title','Subject','Description','Type');
-  $items = dmQuery(array($alias), $params, $fields, array('Date'), 50);
-  var_dump($items);
+  $total = 0;
+  $items = dmQuery(array($alias), $params, $fields, array('Date'), 50, $total);
+  // var_dump($items);
   
   foreach($items as $item) {
     switch ($item) {
