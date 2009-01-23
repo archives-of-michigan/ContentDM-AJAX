@@ -6,7 +6,7 @@ require 'htmlentities'
 describe "featured_items_for_collection" do
   before(:each) do
     @params = {
-      'alias' => ['p4006coll2']
+      'alias' => '/p4006coll2'
     }
   end
   
@@ -25,7 +25,7 @@ describe "featured_items_for_collection" do
   end
   it "should return [false] for an invalid alias" do
     @params = {
-      'alias' => ['abcdef']
+      'alias' => 'abcdef'
     }
     do_post
     
