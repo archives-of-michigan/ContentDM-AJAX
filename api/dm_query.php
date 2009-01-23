@@ -1,5 +1,5 @@
 <?
-function dm_qery($params) {
+function dm_query($params) {
   $total = 0;
     
   // convert searchstring params to array from stdClass (limitation of JSON parser)
