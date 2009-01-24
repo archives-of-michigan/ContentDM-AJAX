@@ -33,9 +33,9 @@ describe "dmQuery" do
   end
   
   it "should allow searches by alias" do
-    @params['alias'] = ['p4006coll2']
+    @params['alias'] = ['/p4006coll2']
     do_post
     
-    @results.should == [false]
+    @results.should == []
   end
 end
