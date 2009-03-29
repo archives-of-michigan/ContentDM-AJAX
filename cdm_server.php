@@ -37,5 +37,6 @@ switch($command) {
     $results = array( 'error' => 'invalid operation requested: '.$_POST['command'] );
 }
 
+header('Content-Type: application/json');
 echo $json->encode($results);
 ?>
