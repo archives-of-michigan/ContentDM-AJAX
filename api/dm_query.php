@@ -24,6 +24,11 @@ function dm_query($params) {
                     $params->start,
                     $total);
   
-  return $results;
+  $items = array();
+  foreach($results as $result) {
+    $items[] = get_item($result['collection'],$result['pointer']);
+  }
+  
+  return array('items' => $items, 'total_num' => $total);
 }
 ?>
