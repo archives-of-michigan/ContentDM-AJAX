@@ -1,6 +1,9 @@
 <?
-include('../dmscripts/DMSystem.php');
-include('../cdm4/config.php');
+require_once('cdm_ajax_config.php');
+require_once('item.php');
+
+include(CDMConfiguration::root_path.'/dmscripts/DMSystem.php');
+include(CDMConfiguration::root_path.'/cdm4/config.php');
 include('JSON.php');
 
 $command = $_POST['command'];
